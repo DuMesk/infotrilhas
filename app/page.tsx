@@ -1,69 +1,30 @@
 import Image from "next/image";
+import { Footer } from "./_components/footer";
+import { Header } from "./_components/header";
+import { Icon, type IconName } from "./_components/icons";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+const adventures: { name: string; eyebrow: string; icon: IconName }[] = [
+  { name: "Motociclismo", eyebrow: "Estrada sem limites", icon: "helmet" }, { name: "Ciclismo", eyebrow: "Performance em movimento", icon: "bike" }, { name: "Corrida", eyebrow: "Leveza a cada passo", icon: "activity" }, { name: "Trilha", eyebrow: "Pronto para explorar", icon: "mountain" }, { name: "Proteção UV", eyebrow: "Defesa para o sol", icon: "sun" },
+];
+const products = [
+  ["Camisa Térmica","/images/products/camisa-termica-preta.png","Térmico","R$ 129,90","3x de R$ 43,30"], ["Segunda Pele UV 50+","/images/products/segunda-pele-uv.png","UV 50+","R$ 119,90","3x de R$ 39,97"], ["Pernito Thermo Sun","/images/products/pernito-thermo-sun.png","UV 50+","R$ 79,90","2x de R$ 39,95"], ["Manguito UV 50+","/images/products/manguito-uv.png","UV 50+","R$ 59,90","2x de R$ 29,95"], ["Calça Térmica","/images/products/calca-termica.png","Térmico","R$ 139,90","3x de R$ 46,63"], ["Balaclava","/images/products/balaclava.png","Proteção","R$ 49,90","2x de R$ 24,95"],
+];
+const technology: { title:string; text:string; icon:IconName }[] = [
+  {title:"UV 50+",text:"Alta proteção para exposição prolongada ao sol.",icon:"sun"},{title:"Conforto térmico",text:"Equilíbrio de temperatura em diferentes condições.",icon:"temperature"},{title:"Respirabilidade",text:"Tecido inteligente que favorece a troca de calor.",icon:"wind"},{title:"Fabricação própria",text:"Controle de qualidade em cada etapa da produção.",icon:"shield"},
+];
+const benefits: {title:string;text:string;icon:IconName}[] = [{title:"Compra segura",text:"Seus dados sempre protegidos",icon:"lock"},{title:"Envio nacional",text:"Para todo o Brasil",icon:"truck"},{title:"Tecnologia própria",text:"Desenvolvida pela Info Trilhas",icon:"spark"},{title:"Pós-venda",text:"Atendimento que acompanha você",icon:"message"}];
+
+export default function Home() { return <><Header/><main>
+  <section className="hero" aria-labelledby="hero-title"><div className="hero-grid container-shell"><div className="hero-copy"><p className="eyebrow light"><span/>Performance · Proteção · Liberdade</p><h1 id="hero-title">Tecnologia que acompanha sua aventura</h1><p className="hero-subtitle">Proteção UV 50+ e conforto térmico para quem não para.</p><div className="hero-actions"><a href="#mais-vendidos" className="button button-gold">Comprar agora <Icon name="arrow" size={18}/></a><a href="#tecnologia" className="button button-outline">Conheça a tecnologia</a></div><div className="hero-proof" aria-label="Destaques da marca"><span><strong>UV 50+</strong>proteção solar</span><span><strong>Brasil</strong>fabricação própria</span></div></div><div className="hero-visual"><div className="hero-image-frame"><Image src="/images/products/camisa-termica-preta.png" alt="Camisa térmica preta Info Trilhas" fill priority sizes="(max-width: 767px) 88vw, 46vw" className="hero-image"/></div><div className="hero-tag"><Icon name="shield" size={18}/><span><small>Desenvolvida para</small>Alta performance</span></div></div></div></section>
+
+  <section className="section adventures" aria-labelledby="adventures-title"><div className="container-shell"><div className="section-heading"><div><p className="eyebrow"><span/>Feito para o seu ritmo</p><h2 id="adventures-title">Escolha sua aventura</h2></div><p>Encontre a proteção certa para ir mais longe, em qualquer cenário.</p></div><div className="adventure-grid">{adventures.map((item,index)=><a className="adventure-card" href="#mais-vendidos" key={item.name}><span className="card-number">0{index+1}</span><Icon name={item.icon} size={34}/><div><span>{item.eyebrow}</span><h3>{item.name}</h3></div><Icon name="arrow" size={18}/></a>)}</div></div></section>
+
+  <section className="section products-section" id="mais-vendidos" aria-labelledby="products-title"><div className="container-shell"><div className="section-heading products-heading"><div><p className="eyebrow"><span/>Preferidos da comunidade</p><h2 id="products-title">Mais vendidos</h2></div><a href="#mais-vendidos" className="text-link">Ver todos os produtos <Icon name="arrow" size={17}/></a></div><div className="product-grid">{products.map(([name,image,badge,price,installments])=><article className="product-card" key={name}><div className="product-image-wrap"><span className="product-badge">{badge}</span><button className="favorite" type="button" aria-label={`Favoritar ${name}`}><Icon name="heart" size={19}/></button><Image src={image} alt={name} fill sizes="(max-width: 639px) 80vw, (max-width: 1023px) 38vw, 23vw" className="product-image"/></div><div className="product-info"><div className="rating" aria-label="Avaliação ilustrativa: 5 de 5 estrelas"><span>★★★★★</span><small>(12)</small></div><h3>{name}</h3><p className="price">{price}</p><p className="installments">ou {installments} sem juros</p><button type="button" className="product-cta">Ver detalhes <Icon name="arrow" size={16}/></button></div></article>)}</div><p className="demo-note">* Produtos e valores demonstrativos para apresentação comercial.</p></div></section>
+
+  <section className="technology" id="tecnologia" aria-labelledby="technology-title"><div className="tech-grid-lines" aria-hidden="true"/><div className="container-shell tech-content"><div className="tech-intro"><p className="eyebrow light"><span/>Tecnologia Info Trilhas</p><h2 id="technology-title">Não é apenas uma peça.<br/>É tecnologia entre você e o ambiente.</h2><p>Materiais selecionados e desenvolvimento próprio para transformar proteção em liberdade de movimento.</p></div><div className="tech-list">{technology.map((item,index)=><article className="tech-item" key={item.title}><span className="tech-icon"><Icon name={item.icon} size={25}/></span><div><small>0{index+1}</small><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></div></section>
+
+  <section className="section lines-section" aria-labelledby="lines-title"><div className="container-shell"><div className="center-heading"><p className="eyebrow"><span/>Duas linhas. Toda proteção.</p><h2 id="lines-title">Proteção para o sol.<br/>Conforto para o frio.</h2></div><div className="lines-grid"><article className="line-card"><div className="line-copy"><span className="line-kicker">Linha 01 · UV 50+</span><h3>Thermo Sun</h3><p>Proteção solar e respirabilidade para os dias em que o movimento encontra o sol.</p><a href="#mais-vendidos" className="text-link light-link">Explorar linha <Icon name="arrow" size={17}/></a></div><Image src="/images/products/pernito-thermo-sun.png" alt="Pernito da linha Thermo Sun" fill sizes="(max-width: 767px) 90vw, 45vw"/></article><article className="line-card"><div className="line-copy"><span className="line-kicker">Linha 02 · Térmica</span><h3>Thermo Comfort</h3><p>Isolamento térmico e toque confortável para manter o corpo ativo nos dias frios.</p><a href="#mais-vendidos" className="text-link light-link">Explorar linha <Icon name="arrow" size={17}/></a></div><Image src="/images/products/calca-termica.png" alt="Calça da linha Thermo Comfort" fill sizes="(max-width: 767px) 90vw, 45vw"/></article></div></div></section>
+
+  <section className="wholesale" id="atacado" aria-labelledby="wholesale-title"><div className="container-shell wholesale-inner"><div className="wholesale-mark" aria-hidden="true">+</div><div><p className="eyebrow light"><span/>Vantagens progressivas</p><h2 id="wholesale-title">Compre mais.<br/>Pague menos.</h2></div><div className="wholesale-copy"><p>Condições especiais são aplicadas automaticamente conforme a quantidade.</p><a href="#rodape" className="button button-gold">Conheça o atacado <Icon name="arrow" size={18}/></a></div></div></section>
+  <section className="benefits" aria-label="Benefícios Info Trilhas"><div className="container-shell benefits-grid">{benefits.map(item=><article key={item.title}><Icon name={item.icon} size={25}/><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></section>
+  </main><Footer/></>; }
