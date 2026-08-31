@@ -1,0 +1,15 @@
+.demo-access {
+  display: block;
+  padding: 8px 9px;
+  font-size: 7px;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+@media (max-width: 390px) {
+  .header-actions > button:not(.bag-button) { display: none; }
+}
+
+@media (min-width: 900px) {
+  .demo-access { padding: 9px 12px; font-size: 9px; letter-spacing: .08em; }
+}

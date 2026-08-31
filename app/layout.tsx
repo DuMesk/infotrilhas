@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./demo.css";
+import "./responsive-demo.css";
 
 export const metadata: Metadata = {
   title: "Info Trilhas | Proteção UV 50+ e Conforto Térmico",

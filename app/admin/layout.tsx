@@ -1,0 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+
+const menu = [{label:"Dashboard",href:"/admin",icon:"⌂"},{label:"Produtos",href:"/admin/produtos",icon:"◇"},{label:"Estoque",href:"/admin/produtos",icon:"▦"},{label:"Pedidos",href:"/admin",icon:"▤"},{label:"Clientes",href:"/admin",icon:"♙"},{label:"Avaliações",href:"/admin",icon:"★"},{label:"Perguntas",href:"/admin",icon:"?"},{label:"Caixa/Balcão",href:"/admin/caixa",icon:"▣"},{label:"Configurações",href:"/admin",icon:"⚙"}];
+export default function AdminLayout({children}:{children:ReactNode}) { return <div className="admin-shell"><aside className="admin-sidebar"><div className="admin-brand"><Image src="/images/logo/logo-infotrilhas.png" alt="Info Trilhas" width={666} height={374}/><span>Gestão</span></div><nav>{menu.map(item=><Link href={item.href} key={item.label}><i>{item.icon}</i><span>{item.label}</span></Link>)}</nav><Link className="back-store" href="/">← Voltar para loja</Link></aside><div className="admin-stage"><header className="admin-topbar"><div><strong>Demonstração comercial</strong><small>Ambiente com dados fictícios</small></div><div className="admin-user"><span>IT</span><div><b>Info Trilhas</b><small>Administrador</small></div></div></header>{children}</div></div>; }
