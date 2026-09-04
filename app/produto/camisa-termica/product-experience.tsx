@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 import {Icon,type IconName} from "../../_components/icons";
-const gallery=[{src:"/images/products/camisa-termica-preta.png",alt:"Blusa térmica masculina Info Trilhas preta"},{src:"/images/products/segunda-pele-uv.png",alt:"Detalhe frontal do tecido técnico"},{src:"/images/products/calca-termica.png",alt:"Composição da linha para baixas temperaturas"}];
+const gallery=[
+  {src:"/images/products/camisa-termica-preta.png",alt:"Blusa térmica masculina Info Trilhas preta"},
+  {src:"/images/products/camisa-termica-preta1.png",alt:"Blusa térmica masculina Info Trilhas preta — imagem 2"},
+  {src:"/images/products/camisa-termica-preta2.png",alt:"Blusa térmica masculina Info Trilhas preta — imagem 3"},
+  {src:"/images/products/camisa-termica-preta3.png",alt:"Blusa térmica masculina Info Trilhas preta — imagem 4"},
+  {src:"/images/products/camisa-termica-preta4.png",alt:"Blusa térmica masculina Info Trilhas preta — imagem 5"},
+];
 const tech:{title:string;text:string;icon:IconName}[]=[{title:"Proteção UV 50+",text:"Barreira para exposição solar durante atividades externas.",icon:"sun"},{title:"Conforto térmico",text:"Ajuda a equilibrar a temperatura corporal.",icon:"temperature"},{title:"Respirabilidade",text:"Favorece a troca de calor durante o movimento.",icon:"wind"},{title:"Secagem rápida",text:"Tecnologia que dispersa a umidade.",icon:"spark"},{title:"Fabricação própria",text:"Qualidade controlada em cada etapa.",icon:"shield"}];
 export function ProductExperience(){const[image,setImage]=useState(0);const[color,setColor]=useState("Preto");const[size,setSize]=useState("M");const[guide,setGuide]=useState(false);const message=`Olá! Tenho interesse na Blusa Térmica Masculina Info Trilhas.\n\nCor: ${color}\nTamanho: ${size}\nQuantidade: 1\n\nGostaria de mais informações.`;return <main className="product-page"><div className="container-shell product-breadcrumb"><Link href="/">← Voltar para a loja</Link><span>Produto demonstrativo</span></div>
 <section className="container-shell product-hero"><div className="product-gallery"><div className="product-main-image"><span className="uv-seal">FEITO<br/>NO BRASIL</span><Image src={gallery[image].src} alt={gallery[image].alt} fill priority sizes="(max-width: 900px) 94vw, 52vw"/></div><div className="product-thumbs">{gallery.map((item,index)=><button type="button" className={image===index?"active":""} onClick={()=>setImage(index)} key={item.src} aria-label={`Ver imagem ${index+1}`}><Image src={item.src} alt="" fill sizes="90px"/></button>)}</div></div>
