@@ -24,4 +24,4 @@ export const metadata: Metadata = {
     images: [{ url: "/opengraph-image.png", alt: "Info Trilhas" }],
   },
 };
-export default function RootLayout({children}:LayoutProps<"/">){return <html lang="pt-BR" className="h-full antialiased"><body className="min-h-full flex flex-col">{children}</body></html>}
+export default function RootLayout({children}:LayoutProps<"/">){return <html lang="pt-BR" className="h-full antialiased" data-scroll-behavior="smooth"><body className="min-h-full flex flex-col">{children}</body></html>}

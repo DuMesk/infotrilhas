@@ -55,7 +55,7 @@ export function ProductExperience({ product }: { product: Product }) {
       <section ref={heroRef} className="container-shell product-hero" aria-labelledby="product-title">
         <div className="product-gallery">
           <button type="button" className={`product-main-image ${styles.zoomImage} ${zoomed ? styles.zoomed : ""}`} id="product-gallery-image" aria-label={zoomed ? "Reduzir imagem do produto" : "Ampliar imagem do produto"} aria-pressed={zoomed} onClick={() => setZoomed(value => !value)} onKeyDown={event => { if (event.key === "Escape") setZoomed(false); }}>
-            <Image src={product.images[image].src} alt={product.images[image].alt} fill priority sizes="(max-width: 899px) 94vw, 50vw" />
+            <Image src={product.images[image].src} alt={product.images[image].alt} fill preload={image === 0} sizes="(max-width: 639px) calc(100vw - 88px), (max-width: 899px) calc(100vw - 112px), calc((min(100vw - 56px, 1240px) - clamp(24px, 3vw, 44px)) / 2 - 2px)" />
             <span className={styles.zoomHint}><Icon name="search" size={15} />{zoomed ? "Toque para reduzir" : "Ampliar imagem"}</span>
           </button>
           <div className={styles.galleryCaption} aria-live="polite">
@@ -65,7 +65,7 @@ export function ProductExperience({ product }: { product: Product }) {
           <div className="product-thumbs" role="group" aria-label="Imagens do produto">
             {product.images.map((item, index) => (
               <button type="button" className={image === index ? "active" : ""} onClick={() => { setImage(index); setZoomed(false); }} key={item.src} aria-label={`Ver imagem ${index + 1}: ${item.label}`} aria-pressed={image === index} aria-controls="product-gallery-image">
-                <Image src={item.src} alt="" fill sizes="76px" />
+                <Image src={item.src} alt="" fill sizes="(max-width: 899px) 42px, 52px" />
               </button>
             ))}
           </div>
