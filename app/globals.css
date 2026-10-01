@@ -136,3 +136,18 @@ body:has(.storefront) .footer{background:#090909ed;border-top:1px solid #d4af373
 
 /* Contraste localizado para textos sobre o background claro no desktop */
 @media(min-width:1080px){.storefront .hero h1,.storefront .section-heading h2,.storefront .center-heading h2,.storefront .technology h2,.storefront .availability-inner h2,.storefront .wholesale h2{text-shadow:0 2px 12px #000d,0 1px 2px #000}.storefront .hero-subtitle,.storefront .section-heading>p,.storefront .center-heading>p:last-child,.storefront .tech-intro>p:last-child,.storefront .availability-inner>div>p:last-child,.storefront .wholesale-copy p{color:#eee9e1;text-shadow:0 1px 6px #000,0 1px 2px #000}.storefront .tech-item,.storefront .benefits article{background:linear-gradient(90deg,#09090947,transparent);text-shadow:0 1px 4px #000}.storefront .tech-item p,.storefront .benefits p{color:#d8d1c7}}
+
+/* Atalho do produto: indicação sobreposta preserva a composição da Home. */
+.storefront .hero-product-link { cursor: pointer; }
+.storefront .hero-product-link .hero-image { transition: opacity .25s ease; }
+.storefront .hero-product-info .hero-product-link-cue { position: absolute; top: calc(100% + 6px); right: 12px; display: inline-flex; align-items: center; gap: 7px; color: var(--gold); font-size: 9px; font-weight: 750; letter-spacing: .1em; opacity: 1; transition: opacity .25s ease; white-space: nowrap; }
+.storefront .hero-product-link:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+.storefront .hero-product-link:focus-visible .hero-product-info { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .storefront .hero-product-link .hero-product-link-cue { opacity: 0; }
+  .storefront .hero-product-link:hover .hero-image { opacity: .87; }
+  .storefront .hero-product-link:hover .hero-product-link-cue, .storefront .hero-product-link:focus-visible .hero-product-link-cue { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .storefront .hero-product-link .hero-image, .storefront .hero-product-link .hero-product-link-cue { transition: none; }
+}

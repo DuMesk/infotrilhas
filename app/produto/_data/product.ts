@@ -8,6 +8,7 @@ export type Product = {
   audience: string;
   description: string;
   price: number;
+  originalPrice?: number;
   status: string;
   origin: string;
   shipping: string;
@@ -34,8 +35,11 @@ export const product: Product = {
   shipping: "Envio pelos Correios em até 7 dias úteis.",
   // Assets existentes sem textos promocionais antigos incorporados à imagem.
   images: [
-    { src: "/images/products/camisa-termica-preta.png", alt: "Blusa térmica preta Info Trilhas em cenário de montanhas", label: "Produto" },
+    { src: "/images/products/camisa-termica-preta.webp", alt: "Blusa térmica preta Info Trilhas em cenário de montanhas", label: "Produto" },
     { src: "/images/products/camisa-termica-preta-cutout.png", alt: "Blusa térmica preta Info Trilhas em fundo escuro", label: "Peça em destaque" },
+    { src: "/images/products/camisa-termica-preta2.webp", alt: "Frente, costas, gola e tecido da blusa térmica preta", label: "Detalhes da peça" },
+    { src: "/images/products/camisa-termica-preta1.webp", alt: "Apresentação da blusa térmica preta Info Trilhas", label: "Conforto térmico" },
+    { src: "/images/products/camisa-termica-preta4.webp", alt: "Blusa térmica preta em uso no motociclismo", label: "Na aventura" },
   ],
   sizes: [
     { size: 34, equivalent: "PP FEM", measurements: [41, 40, 49, 61, 65] },

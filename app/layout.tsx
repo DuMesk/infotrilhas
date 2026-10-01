@@ -8,7 +8,7 @@ const description = "Vestuário técnico brasileiro: blusa térmica masculina, r
 export const metadata: Metadata = {
   title,
   description,
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.infotrilhas.com.br"),
   openGraph: {
     title,
     description,
