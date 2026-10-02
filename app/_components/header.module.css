@@ -5,6 +5,7 @@
 .productActions:global(.header-actions) > button.productAction { display: grid; flex: none; }
 .productActions:global(.header-actions) > button:hover { color: var(--gold); }
 @media (max-width: 767px) {
+  .announcement { display: none; }
   .productActions:global(.header-actions) > button.productAction { width: 28px; height: 42px; }
   .productActions:global(.header-actions) :global(.bag-button) > span { right: -2px; }
 }
@@ -19,3 +20,10 @@
   .companyLink:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   :global(body):has(:global(.storefront)) .companyLink { color: var(--gold); }
 }
+
+/* Variante usada somente pelas p?ginas de categoria. */
+.categoryHeader:global(.site-header) { background: linear-gradient(110deg, #17100b, #090909); color: #f5f1e8; border-bottom-color: #d4af3738; box-shadow: 0 8px 24px #0003; }
+.categoryHeader .companyLink { color: var(--gold); }
+.categoryHeader :global(.desktop-nav) a:hover, .categoryHeader :global(.header-actions) > button:hover, .categoryHeader :global(.mobile-menu) > summary:hover { color: var(--gold); }
+.categoryHeader :global(.bag-button) > span { color: #181108; }
+.categoryHeader :global(.desktop-nav) a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
