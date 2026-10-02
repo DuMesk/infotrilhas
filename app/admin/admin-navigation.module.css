@@ -1,0 +1,13 @@
+.sidebarReturn:global(.back-store) { display: none; }
+.topbar:global(.admin-topbar) { height: auto; min-height: 68px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "return user" "demo demo"; gap: 8px 12px; padding: 12px 16px; }
+.demoInfo { grid-area: demo; }
+.user { grid-area: user; }
+.mobileReturn { grid-area: return; display: inline-flex; align-items: center; gap: 8px; width: fit-content; min-height: 36px; padding: 6px 10px; border: 1px solid #d4af3750; background: #d4af3710; color: #4a260f; font-size: 11px; font-weight: 650; }
+.mobileReturn:hover { background: #d4af3725; }
+.mobileReturn:focus-visible, .sidebarReturn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (min-width: 900px) {
+  .topbar:global(.admin-topbar) { height: 76px; display: flex; padding: 0 32px; }
+  .mobileReturn { display: none; }
+  .sidebarReturn:global(.back-store) { display: flex; align-items: center; gap: 10px; margin: auto 18px 24px; padding: 13px 12px; border: 1px solid #d4af3745; background: #d4af370b; color: #dbb95b; font-size: 11px; font-weight: 650; }
+  .sidebarReturn:hover { border-color: #dbb95b; background: #d4af371a; }
+}

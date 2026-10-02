@@ -1,8 +1,12 @@
-export type IconName = "search" | "user" | "heart" | "bag" | "menu" | "close" | "arrow" | "helmet" | "bike" | "activity" | "mountain" | "sun" | "temperature" | "wind" | "shield" | "lock" | "truck" | "spark" | "message" | "instagram" | "facebook";
+export type IconName = "search" | "user" | "heart" | "bag" | "menu" | "close" | "arrow" | "arrow-left" | "whatsapp" | "share" | "dashboard" | "helmet" | "bike" | "activity" | "mountain" | "sun" | "temperature" | "wind" | "shield" | "lock" | "truck" | "spark" | "message" | "instagram" | "facebook";
 
 export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
   const paths: Record<IconName, React.ReactNode> = {
+    "arrow-left": <path d="M19 12H5m5-5-5 5 5 5" />,
+    share: <><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4" /></>,
+    dashboard: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+    whatsapp: <><path d="M20.5 11.7a8.7 8.7 0 0 1-12.8 7.6L3 20.6l1.3-4.5a8.7 8.7 0 1 1 16.2-4.4Z" /><path d="M8.4 7.4c-.7 0-1.4.8-1.4 1.8 0 2.7 3.9 6.6 6.8 7 .9.1 2-.6 2.3-1.3l.1-.8-2.5-1.2-.9 1c-1.5-.6-2.7-1.8-3.4-3.2l.9-1-1.1-2.3h-.8Z" strokeWidth="1.4" /></>,
     search: <><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></>, user: <><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c.8-4 3.3-6 7.5-6s6.7 2 7.5 6"/></>,
     heart: <path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>, bag: <><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></>,
     menu: <path d="M4 7h16M4 12h16M4 17h16"/>, close: <path d="m6 6 12 12M18 6 6 18"/>, arrow: <><path d="M5 12h14M14 7l5 5-5 5"/></>,

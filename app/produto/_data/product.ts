@@ -1,5 +1,11 @@
 import type { IconName } from "../../_components/icons";
 
+export type ProductReview = {
+  name: string;
+  rating: number;
+  comment: string;
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -17,6 +23,7 @@ export type Product = {
   measurementLegend: { key: string; label: string }[];
   measurementNotes: string[];
   features: { title: string; icon: IconName }[];
+  reviews: ProductReview[];
   related: { name: string; image: string; price: number }[];
 };
 
@@ -30,6 +37,8 @@ export const product: Product = {
   audience: "Adulto · Unissex",
   description: "Vestuário térmico e de proteção para todas as temperaturas.",
   price: 129.9,
+  // Valor demonstrativo temporário: substituir pelo preço original aprovado.
+  originalPrice: 159.9,
   status: "Faça o seu pedido",
   origin: "Produto Nacional",
   shipping: "Envio pelos Correios em até 7 dias úteis.",
@@ -68,6 +77,12 @@ export const product: Product = {
     { title: "Retenção de calor corporal", icon: "temperature" },
     { title: "Rápida absorção de suor", icon: "wind" },
     { title: "Tratamento anti odor", icon: "spark" },
+  ],
+  // Comentários fictícios para demonstração; substituir por avaliações reais futuramente.
+  reviews: [
+    { name: "Marcos A.", rating: 5, comment: "Gostei do conforto da peça nas manhãs mais frias. O tecido acompanha bem os movimentos." },
+    { name: "Ana P.", rating: 5, comment: "Uso como segunda pele nos passeios de moto. A blusa é confortável e fácil de combinar com outras camadas." },
+    { name: "Rafael S.", rating: 4, comment: "Boa sensação térmica e acabamento caprichado. A tabela de medidas ajudou a escolher o tamanho." },
   ],
   // Produtos e preços já presentes na Home; ainda sem páginas próprias.
   related: [

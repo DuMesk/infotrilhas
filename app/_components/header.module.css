@@ -1,0 +1,21 @@
+.companyLink { display: none; }
+.mobileCompanyLink > span { display: inline-flex; align-items: center; gap: 10px; }
+.actions button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.actionMessage { position: absolute; z-index: 2; right: 16px; top: calc(100% + 8px); max-width: min(320px, calc(100vw - 32px)); margin: 0; padding: 10px 14px; border: 1px solid #d4af3760; background: #17110c; color: #f5f1e8; font-size: 12px; box-shadow: 0 8px 24px #0005; }
+.productActions:global(.header-actions) > button.productAction { display: grid; flex: none; }
+.productActions:global(.header-actions) > button:hover { color: var(--gold); }
+@media (max-width: 767px) {
+  .productActions:global(.header-actions) > button.productAction { width: 28px; height: 42px; }
+  .productActions:global(.header-actions) :global(.bag-button) > span { right: -2px; }
+}
+@media (max-width: 359px) {
+  .productActions:global(.header-actions) { margin-right: -4px; }
+  .productActions:global(.header-actions) > button.productAction { width: 26px; }
+}
+@media (min-width: 1080px) {
+  .actions { position: relative; }
+  .companyLink { position: absolute; top: -14px; right: 0; display: inline-flex; align-items: center; white-space: nowrap; color: var(--gold-dark); font-size: 10px; font-weight: 650; line-height: 1.3; border-bottom: 1px solid #d4af3760; }
+  .companyLink:hover { color: var(--gold); border-color: currentColor; }
+  .companyLink:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  :global(body):has(:global(.storefront)) .companyLink { color: var(--gold); }
+}

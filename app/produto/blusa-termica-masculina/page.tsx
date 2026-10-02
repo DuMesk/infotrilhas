@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProductPage() {
-  return <><Header /><ProductExperience product={product} /><Footer /></>;
+  return <><Header productName={product.name} /><ProductExperience product={product} /><Footer /></>;
 }

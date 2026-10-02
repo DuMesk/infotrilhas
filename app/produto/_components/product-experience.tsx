@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode, type PointerEvent } from "react";
 import { Icon } from "../../_components/icons";
 import type { Product } from "../_data/product";
+import { ShippingEstimator } from "./shipping-estimator";
 import styles from "./product-experience.module.css";
 
 const currency = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -29,7 +30,6 @@ export function ProductExperience({ product }: { product: Product }) {
   const [lightbox, setLightbox] = useState(false);
   const [ordering, setOrdering] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [actionMessage, setActionMessage] = useState("");
   const stopped = useRef(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pointer = useRef<{ x: number; y: number } | null>(null);
@@ -70,15 +70,6 @@ export function ProductExperience({ product }: { product: Product }) {
     return () => { if (timer.current) clearInterval(timer.current); };
   }, [product.images.length]);
 
-  async function shareProduct() {
-    try {
-      if (navigator.share) await navigator.share({ title: product.name, url: window.location.href });
-      else { await navigator.clipboard.writeText(window.location.href); setActionMessage("Link copiado!"); }
-    } catch (error) {
-      if (!(error instanceof DOMException && error.name === "AbortError")) setActionMessage("Não foi possível compartilhar. Copie o endereço da página.");
-    }
-  }
-
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
@@ -102,6 +93,14 @@ export function ProductExperience({ product }: { product: Product }) {
       window.removeEventListener("resize", updateOffset);
     };
   }, []);
+
+  function openOrder() {
+    setOrderPreview(false);
+    setOrdering(true);
+  }
+
+  const reviewCount = product.reviews.length;
+  const averageRating = reviewCount ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / reviewCount : 0;
 
   function openGuide() {
     if (!guideRef.current) return;
@@ -137,20 +136,16 @@ export function ProductExperience({ product }: { product: Product }) {
         </div>
 
         <div className="product-buybox">
-          <p className="product-kicker"><span>{product.line}</span><span>{product.condition}</span></p>
+          <div className={styles.buyboxTop}>
+            <p className="product-kicker"><span>{product.line}</span><span>{product.condition}</span></p>
+          </div>
           <h1 id="product-title">{product.name}</h1>
           <p className="product-positioning">{product.description}</p>
-          <div className="product-price">{product.originalPrice !== undefined && <del className={styles.originalPrice}>DE {currency(product.originalPrice)}</del>}<strong>{currency(product.price)}</strong></div>
-          <div className={styles.actions}>
-            <button type="button" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${product.name} ${window.location.href}`)}`, "_blank", "noopener,noreferrer")}><Icon name="message" size={16} />WhatsApp</button>
-            <button type="button" onClick={shareProduct}><Icon name="arrow" size={16} />Compartilhar</button>
-            <button type="button" onClick={() => setActionMessage("A sacola estará disponível em breve.")}><Icon name="bag" size={16} />Sacola</button>
-          </div>
-          {actionMessage && <p role="status" className={styles.actionMessage}>{actionMessage}</p>}
+          <div className="product-price">{product.originalPrice !== undefined && <del className={styles.originalPrice}>De {currency(product.originalPrice)}</del>}<strong>{product.originalPrice !== undefined && <span className={styles.pricePrefix}>Por </span>}{currency(product.price)}</strong></div>
           <p className={styles.orderStatus}><span />{product.status} · {product.origin}</p>
 
           <div className={styles.orderArea}>
-            <button type="button" className="button button-gold" aria-haspopup="dialog" onClick={() => { setOrderPreview(false); setOrdering(true); }}>FAZER PEDIDO <Icon name="arrow" size={18} /></button>
+            <button type="button" className="button button-gold" aria-haspopup="dialog" onClick={openOrder}>FAZER PEDIDO <Icon name="arrow" size={18} /></button>
           </div>
         </div>
       </section>
@@ -188,17 +183,15 @@ export function ProductExperience({ product }: { product: Product }) {
 
       <div className={`container-shell ${styles.afterHero}`}>
         <button className={`guide-link ${styles.guideLink}`} type="button" onClick={openGuide}>Ver tabela de medidas <Icon name="arrow" size={15} /></button>
-        <div>
-          <p className={styles.shippingLine}><Icon name="truck" size={17} />{product.shipping}</p>
-          <p id="order-demo-note" className={styles.demoNote}>Demonstração · pedidos ainda não disponíveis pelo site.</p>
-        </div>
+        <p id="order-demo-note" className={styles.demoNote}>Demonstração · pedidos ainda não disponíveis pelo site.</p>
+        <ShippingEstimator shippingInfo={product.shipping} />
         {orderPreview && <p role="status" className={styles.orderFeedback}>{selectedSize ? `Tamanho ${selectedSize.size} (${selectedSize.equivalent}) selecionado. ` : ""}Esta é uma demonstração. Nenhum pedido foi enviado.</p>}
       </div>
 
       <section className="product-tech" aria-labelledby="product-tech-title">
-        <div className="container-shell">
-          <p className="eyebrow light"><span />Tecnologia Info Trilhas</p>
-          <h2 id="product-tech-title">Conforto e proteção</h2>
+        <div className={`container-shell ${styles.techInner}`}>
+          <div><p className="eyebrow light"><span />Tecnologia Info Trilhas</p>
+          <h2 id="product-tech-title">Conforto e proteção</h2></div>
           <div className="product-tech-grid">
             {product.features.map(item => <article key={item.title}><Icon name={item.icon} size={28} /><h3>{item.title}</h3></article>)}
           </div>
@@ -234,10 +227,21 @@ export function ProductExperience({ product }: { product: Product }) {
         </details>
       </section>
 
-      <section className={`container-shell ${styles.shippingSection}`} aria-labelledby="product-shipping-title">
-        <Icon name="truck" size={34} />
-        <div><p className="eyebrow"><span />Pedido e envio</p><h2 id="product-shipping-title">{product.status}</h2><p>{product.shipping}</p><span>{product.origin}</span></div>
+      <section className="container-shell" aria-labelledby="product-shipping-title">
+        <button type="button" className={styles.shippingSection} aria-haspopup="dialog" onClick={openOrder}>
+          <Icon name="truck" size={34} />
+          <span className={styles.shippingContent}><span className={styles.shippingEyebrow}>Pedido e envio</span><span id="product-shipping-title" className={styles.shippingTitle}>{product.status}</span><span className={styles.shippingDetail}>{product.shipping}</span><span>{product.origin}</span></span>
+          <Icon name="arrow" size={22} />
+        </button>
       </section>
+
+      {reviewCount > 0 && <section className={`container-shell ${styles.reviewsSection}`} aria-labelledby="product-reviews-title">
+        <div className={styles.reviewsHeading}>
+          <div><p className="eyebrow"><span />Quem veste Info Trilhas</p><h2 id="product-reviews-title">Avaliações do produto</h2><p className={styles.reviewsNote}>Comentários demonstrativos · avaliações fictícias para apresentação.</p></div>
+          <div className={styles.reviewSummary}><strong>{averageRating.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}<small> / 5</small></strong><span className={styles.stars} aria-label={`Nota média: ${averageRating.toFixed(1)} de 5`}><span aria-hidden="true">{"★".repeat(Math.round(averageRating))}{"☆".repeat(5 - Math.round(averageRating))}</span></span><span>{reviewCount} avaliações demonstrativas</span></div>
+        </div>
+        <div className={styles.reviewsGrid}>{product.reviews.map(review => <article key={review.name} className={styles.review}><div className={styles.reviewAuthor}><h3>{review.name}</h3><span className={styles.stars} aria-label={`${review.rating} de 5 estrelas`}><span aria-hidden="true">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</span></span></div><p>{review.comment}</p></article>)}</div>
+      </section>}
 
       <section className={styles.relatedSection} aria-labelledby="related-title">
         <div className="container-shell">
